@@ -4,11 +4,21 @@ import ContactService from '../services/tour.service.';
 import * as Joi from '@hapi/joi';
 import TourService from '../services/tour.service.';
 import { tourSchema } from '../validators/tour.validator';
+import { connection } from 'mongoose';
 
 const tourService: TourService = new TourService();
-
 export class TourController{
 
+    public async getImage(req: Request, res: Response) {
+        try {
+            return res.writeHead(200, {
+                'Content-Type': 'image/jpg'
+            });
+        } catch (err) {
+            return res.status(404).json({message: 'not found', error: err})
+        }
+    }
+    
     public async getTours (req: Request, res: Response) {
         try {
             const tours = await tourService.getAllTours();
@@ -17,7 +27,6 @@ export class TourController{
             return res.status(404).json({message: 'not found', error: err})
         }
     }
-
     public async getTour (req: Request, res: Response) {
         try {
             const id = req.params.id;

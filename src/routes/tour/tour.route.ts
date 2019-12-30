@@ -14,5 +14,4 @@ router.route('/:id')
     .put(tourController.updateTour)
     .delete(tourController.deleteTour);
 
-
 export const tourRoutes: Router = router;

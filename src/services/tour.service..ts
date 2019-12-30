@@ -16,7 +16,7 @@ class TourService {
     public async createTour (data: any, files: any) {
         console.log(`files in service - ${files}`)
         if (files) {
-            if (files.image) {
+            if (files.image && files.image.mimetype.startsWith('image')) {
                 try {
                     const image = await Files.uploadFile('tours', files.image);
                     data['image'] = image;
