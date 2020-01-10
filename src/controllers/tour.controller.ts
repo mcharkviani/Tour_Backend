@@ -78,7 +78,7 @@ export class TourController{
 
     public async updateTour(req: Request, res: Response) {
         try {
-            const id = req.params.contactId;
+            const id = req.params.id;
             const request: any = {
                 company: req.body.company,
                 email:req.body.email,

@@ -11,7 +11,7 @@ import * as path from 'path';
 class App {
     public app: express.Application;
     public router: Router =  Router();
-    public mongoUri: string = 'mongodb://localhost:27017/ToursDB';
+    public mongoUri: any = process.env.MONGO_URI;
 
     constructor() {
         this.app = express(); 
@@ -30,7 +30,13 @@ class App {
     }
 
     private mongoSetup(): void { 
-        mongoose.connect(this.mongoUri, { useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false } );
+        mongoose.connect(this.mongoUri, { useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false })
+        .then(() => {
+            console.log('DB Successfully Connected');
+        })
+        .catch(err => {
+            console.log(`Error occurred - ${err}`);
+        })
     }
 
     private addRoutes(): void {

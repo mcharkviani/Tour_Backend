@@ -31,6 +31,7 @@ class TourService {
 
     public async updateTour(id: string, data: any, files: any) {
         const tour = await this.getTour(id);
+        console.log('tour', tour)
         if(tour === null)
             throw({type: 'Tour does not exist'});
 
