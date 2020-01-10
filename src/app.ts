@@ -7,6 +7,7 @@ import * as routes from './routes';
 import * as fileUpload from 'express-fileupload';
 import * as dotenv from 'dotenv'
 import * as path from 'path';
+import * as morgan from 'morgan';
 
 class App {
     public app: express.Application;
@@ -25,6 +26,7 @@ class App {
         this.app.use(bodyParser.urlencoded({ extended: false }));
         this.app.use(cors());
         this.app.use(fileUpload());
+        this.app.use(morgan('dev'));
         // this.app.use(express.static(path.join(__dirname, 'public')));
         dotenv.config();
     }
